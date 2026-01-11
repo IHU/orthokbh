@@ -1,0 +1,9 @@
+// pages/HomePage.tsx
+import React from "react";
+import { ContentTemplate } from "@/templates/ContentTemplate";
+import { getPageContent } from "@/lib/cmsClient";
+
+export default async function HomePage() {
+  const content = await getPageContent("home"); // Fetch from Umbraco/Headless CMS
+  return <ContentTemplate blocks={content.blocks} />;
+}

@@ -1,0 +1,12 @@
+export { default as Hero } from './Hero';
+export {  Footer } from './Footer';
+export { default as Feature } from './Feature';
+export { default as TextWithImage } from './TextWithImage';
+export { default as Container } from './Container';
+export { default as Service } from './Service';
+export { default as ContactForm } from './ContactForm';
+export { default as Contact } from './Contact';
+export { default as IFrame } from './IFrameMap';
+export { default as RichText } from './RichText';
+export { default as TeaserCard } from './TeaserCard';
+export { default as CtaAction } from './CtaAction';
