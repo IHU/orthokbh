@@ -78,7 +78,7 @@ export const Footer: React.FC<FooterProps> = ({
           {/* Treatments */}
           <div>
             <h4 className="font-headline text-lg font-bold mb-2">
-              Technologies/Platforms
+              Operationer
             </h4>
             <ul className="space-y-2">
               {links.map((link, index) => (
@@ -92,7 +92,7 @@ export const Footer: React.FC<FooterProps> = ({
 
           {/* More Information */}
           <div>
-            <h4 className="font-headline text-lg font-bold mb-2">Legal</h4>
+            <h4 className="font-headline text-lg font-bold mb-2">Links</h4>
             <ul className="space-y-2">
               {quickLinks.map((link, index) => (
                 <li key={index} className="flex items-center gap-2">
@@ -106,7 +106,7 @@ export const Footer: React.FC<FooterProps> = ({
           {/* Opening Hours & Phone Hours */}
           <div>
             <h4 className="font-headline text-lg font-bold mb-2">
-              Simple Digital Experiences
+              Telefon tider
             </h4>
             <ul className="space-y-1">
               {workingHoursExtended && workingHoursExtended.length > 0 ? (

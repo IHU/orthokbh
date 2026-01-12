@@ -1,4 +1,4 @@
-import { ServiceCardData } from "@ihu/umbraco-components";
+import { ServiceCardData, useServiceCard } from "@ihu/umbraco-components";
 import Link from "next/link";
 import { Button } from "../atoms/button";
 import {
@@ -8,7 +8,13 @@ import {
   CardHeader,
   CardTitle,
 } from "../atoms/ui/card";
-import { ArrowRight, Hospital, Stethoscope, Users } from "lucide-react";
+import {
+  ArrowRight,
+  ChevronRight,
+  Hospital,
+  Stethoscope,
+  Users,
+} from "lucide-react";
 import { DynamicIcon, iconNames } from "lucide-react/dynamic";
 import type { IconName } from "lucide-react/dynamic";
 import { Icon } from "@radix-ui/themes/components/callout";
@@ -31,13 +37,20 @@ export default function Service({ content }: { content: ServiceCardData }) {
         <CardDescription className="text-base">
           {content?.description}
         </CardDescription>
-        {content.link && (
-          <Button asChild variant="link" className="mt-4 px-0">
-            <Link href={content.link.route?.path ?? "#"}>
-              {content.link.title} <ArrowRight className="ml-2 h-4 w-4" />
+        <nav className="flex flex-col space-y-1">
+          {content.link?.map((linkItem, index) => (
+            <Link
+              key={index}
+              href={linkItem.route?.path ?? "#"}
+              className="group/link flex items-center justify-between py-2 px-2 -mx-2 rounded-md hover:bg-emerald-50 transition-colors"
+            >
+              <span className="text-[15px] font-medium text-slate-700 group-hover/link:text-emerald-700">
+                {linkItem.title}
+              </span>
+              <ChevronRight className="w-4 h-4 text-slate-300 group-hover/link:text-emerald-500 transition-transform group-hover/link:translate-x-1" />
             </Link>
-          </Button>
-        )}
+          ))}
+        </nav>
       </CardContent>
     </Card>
   );

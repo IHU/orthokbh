@@ -24,24 +24,24 @@ export function HeroVariantOne({ content }: { content: HeroSectionData }) {
 
   const primaryCta = content?.primaryCta?.[0];
   const secondaryCta = content?.secondaryCta?.[0];
-
+  console.log("secondaryCta : ", primaryCta, secondaryCta?.url);
   const handlePrimaryCta = () => {
-    if (primaryCta?.url) {
+    if (primaryCta?.route?.path) {
       trackCta({
         action: "hero_primary",
         label: primaryCta.title || "Primary CTA",
-        destination: primaryCta.url,
+        destination: primaryCta.route?.path,
         blockId: blockContext?.blockId,
       });
     }
   };
 
   const handleSecondaryCta = () => {
-    if (secondaryCta?.url) {
+    if (secondaryCta?.route?.path) {
       trackCta({
         action: "hero_secondary",
         label: secondaryCta.title || "Secondary CTA",
-        destination: secondaryCta.url,
+        destination: secondaryCta.route?.path,
         blockId: blockContext?.blockId,
       });
     }
@@ -86,7 +86,7 @@ export function HeroVariantOne({ content }: { content: HeroSectionData }) {
                 onClick={handlePrimaryCta}
               >
                 <Link
-                  href={primaryCta.url || "#"}
+                  href={primaryCta.route?.path || "#"}
                   target={primaryCta.target || "_self"}
                 >
                   {primaryCta.title || "Learn More"}
@@ -102,7 +102,7 @@ export function HeroVariantOne({ content }: { content: HeroSectionData }) {
                 onClick={handleSecondaryCta}
               >
                 <Link
-                  href={secondaryCta.url || "#"}
+                  href={secondaryCta.route?.path || "#"}
                   target={secondaryCta.target || "_self"}
                 >
                   {secondaryCta.title || "Contact Us"}

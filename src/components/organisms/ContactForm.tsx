@@ -209,10 +209,10 @@ export default function ContactForm({
             }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Full Name</FormLabel>
+                <FormLabel>Fulde navn</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="John Doe"
+                    placeholder="Hans Hansen"
                     {...field}
                     className="bg-background text-foreground border-border"
                   />
@@ -233,7 +233,7 @@ export default function ContactForm({
             }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email Address</FormLabel>
+                <FormLabel>Email</FormLabel>
                 <FormControl>
                   <Input
                     type="email"
@@ -258,7 +258,7 @@ export default function ContactForm({
             }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Phone Number</FormLabel>
+                <FormLabel>Telefonnummer</FormLabel>
                 <FormControl>
                   <Input
                     placeholder="+45 12 34 56 78"
@@ -282,10 +282,10 @@ export default function ContactForm({
             }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Message</FormLabel>
+                <FormLabel>Besked</FormLabel>
                 <FormControl>
                   <Textarea
-                    placeholder="How can we help you today?"
+                    placeholder="Hvordan kan vi hjælpe dig i dag?"
                     rows={4}
                     {...field}
                     className="bg-background text-foreground border-border"
@@ -302,7 +302,7 @@ export default function ContactForm({
               className="px-6 py-2 rounded-lg text-base font-medium bg-primary text-primary-foreground"
               disabled={form.formState.isSubmitting}
             >
-              {form.formState.isSubmitting ? "Sender..." : "Send Message"}
+              {form.formState.isSubmitting ? "Sender..." : "Send Besked"}
             </Button>
           </div>
           <p className="text-xs text-muted-foreground text-center">
