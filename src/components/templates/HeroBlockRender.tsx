@@ -11,14 +11,12 @@ const blockVariantMap: Record<string, React.FC<any>> = {
   simple: HeroVariantOne,
   imageLeft: HeroVariantTwo,
   imageRight: HeroVariantThree,
-  
 };
 export default function HeroBlockRender({
   content,
 }: {
   content: HeroSectionData;
 }) {
-  console.log("HeroBlockRender content:", content);
   const DynamicComponent =
     content.heroVariant && blockVariantMap[content.heroVariant]
       ? blockVariantMap[content.heroVariant]

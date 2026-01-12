@@ -38,11 +38,11 @@ export default function Container({
   const isCentered = textAlign === "center";
 
   const handleCtaClick = () => {
-    if (content?.link?.[0].route?.path) {
+    if (content?.link?.route?.path) {
       trackCta({
         action: "container_cta",
-        label: content.link?.[0].title || "Learn More",
-        destination: content.link?.[0].route?.path,
+        label: content.link?.title || "Learn More",
+        destination: content.link.route?.path,
         blockId: blockContext?.blockId,
       });
     }
@@ -64,13 +64,13 @@ export default function Container({
               {content.title}
             </p>
           </div>
-          {content?.link?.[0]?.route?.path && (
+          {content?.link && (
             <Link
-              href={content.link[0].route.path}
+              href={content.link?.route?.path || "#"}
               onClick={handleCtaClick}
               className="absolute top-0 right-0 inline-flex items-center px-8 py-4 border-2 border-foreground rounded-full text-foreground font-semibold hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all group"
             >
-              {content.link[0].title || "Learn More"}
+              {content.link.title || "Learn More"}
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
           )}

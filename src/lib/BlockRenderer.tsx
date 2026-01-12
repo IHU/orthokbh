@@ -28,7 +28,6 @@ import {
 } from "@ihu/umbraco-components/dist/api/umbraco";
 import {
   Footer,
-  Feature,
   Hero,
   TextWithImage,
   Container,
@@ -42,6 +41,7 @@ import TeaserCard from "@/components/organisms/TeaserCard";
 import IFrameMap from "@/components/organisms/IFrameMap";
 import Ups from "@/components/atoms/Ups";
 import HeroBlockRender from "@/components/templates/HeroBlockRender";
+import FeatureBlockRender from "@/components/templates/FeatureBlockRender";
 
 const blockMap: Record<string, React.FC<any>> = {
   heroBlock: HeroBlock,
@@ -66,7 +66,7 @@ const blockMap: Record<string, React.FC<any>> = {
 // Define all UI components in one place
 const blockUIMap: Record<string, React.FC<any>> = {
   heroBlock: Hero,
-  featureBlock: Feature,
+  featureBlock: FeatureBlockRender,
   footerBlock: Footer,
   textWithImageBlock: TextWithImage,
   containerBlock: Container,
@@ -104,7 +104,7 @@ export const BlockRenderer = ({ block }: { block: any }) => {
 
   //console.log("Rendering block of type:", block.contentType);
   //console.log("DynamicComponent:", DynamicComponent);
-  // console.log("UIComponent:", UIComponent);
+   console.log("UIComponent:", UIComponent);
 
   if (!DynamicComponent || !UIComponent) {
     return <div>Component not found : {block.contentType}</div>;

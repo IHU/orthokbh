@@ -3,7 +3,7 @@ import Image from "next/image";
 import { BlockRenderer } from "@/lib/BlockRenderer";
 import { buildUmbracoMediaUrl } from "@/lib/media";
 
-export default function Feature({ content }: { content: FeatureBlockData }) {
+export default function FeatureSimple({ content }: { content: FeatureBlockData }) {
   const blocks =
     content.blocks?.items?.filter(
       (child) => child && child.content && child.content.properties

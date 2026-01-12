@@ -225,7 +225,7 @@ function ArticlePage({ content }: { content: ContentContentModel }) {
           } = data;
           return (
             <article>
-              <section className="bg-secondary/25 py-10">
+              <section className="bg-primary text-primary-foreground py-10">
                 <div className="container mx-auto px-4 md:px-6">
                   <div className="mb-8">
                     <Breadcrumb>
@@ -247,12 +247,12 @@ function ArticlePage({ content }: { content: ContentContentModel }) {
                       </BreadcrumbList>
                     </Breadcrumb>
                   </div>
-                  <div className="text-center">
-                    <h1 className="font-headline text-4xl font-bold tracking-tighter sm:text-5xl">
+                  <div className="max-w-7xl">
+                    <h1 className="text-4xl md:text-5xl font-headline  font-bold tracking-tighter ">
                       {title}
                     </h1>
                     <div
-                      className="mx-auto mt-4 max-w-3xl text-muted-foreground md:text-xl"
+                      className="mx-auto mt-4 md:text-xl"
                       dangerouslySetInnerHTML={{
                         __html: contentArea?.markup || "",
                       }}

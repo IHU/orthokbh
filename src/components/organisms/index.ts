@@ -1,6 +1,6 @@
 export { default as Hero } from './Hero';
 export {  Footer } from './Footer';
-export { default as Feature } from './Feature';
+export { default as Feature } from './FeatureVariants/FeatureSimple';
 export { default as TextWithImage } from './TextWithImage';
 export { default as Container } from './Container';
 export { default as Service } from './Service';

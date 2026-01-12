@@ -10,6 +10,7 @@ import {
 } from "../atoms/ui/card";
 import {
   ArrowRight,
+  CheckCircle2,
   ChevronRight,
   Hospital,
   Stethoscope,
@@ -23,6 +24,7 @@ export default function Service({ content }: { content: ServiceCardData }) {
   const iconName: IconName = content.icon
     ? (content.icon as IconName)
     : "stethoscope";
+  console.log("List Items : ", content.listItems);
   return (
     <Card className="transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
       <CardHeader className="flex flex-row items-center gap-4">
@@ -51,6 +53,14 @@ export default function Service({ content }: { content: ServiceCardData }) {
             </Link>
           ))}
         </nav>
+        <ul className="space-y-4 mb-8 flex-grow">
+          {content.listItems?.map((item, idx) => (
+            <li className="flex gap-3 text-slate-700" key={idx}>
+              <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0" />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
       </CardContent>
     </Card>
   );
