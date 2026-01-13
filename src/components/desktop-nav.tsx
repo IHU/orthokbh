@@ -114,7 +114,7 @@ export function DesktopNav({ navigation }: DesktopNavProps) {
           ))}
         </ul>
       </nav>
-      <ThemeToggle />
+      <ThemeToggle disabled={true} />
     </div>
   );
 }

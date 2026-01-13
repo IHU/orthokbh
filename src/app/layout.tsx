@@ -144,9 +144,10 @@ export default async function RootLayout({
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
           enableSystem
           disableTransitionOnChange
+          manualTheme={{ mode: "light", colorTheme: "green" }}
+          disableToggle={true}
         >
           <AnalyticsProvider value={pageContext}>
             <Suspense fallback={null}>

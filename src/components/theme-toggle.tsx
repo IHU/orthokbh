@@ -13,7 +13,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/atoms/dropdown-menu";
 
-export function ThemeToggle() {
+interface ThemeToggleProps {
+  disabled?: boolean;
+}
+
+export function ThemeToggle({ disabled = false }: ThemeToggleProps) {
   const { theme, setTheme } = useTheme();
   const [colorTheme, setColorTheme] = React.useState("default");
 
@@ -42,6 +46,10 @@ export function ThemeToggle() {
 
     setColorTheme(color);
   };
+
+  if (disabled) {
+    return null;
+  }
 
   return (
     <DropdownMenu>

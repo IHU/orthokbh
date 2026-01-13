@@ -113,11 +113,75 @@ The dev server runs with `--experimental-https`. Trust the certificates in `cert
 
 Extend the experience by adding new entries to `blockMap`/`blockUIMap` and corresponding React components inside `src/components/organisms`.
 
+## Theme System
+
+The application supports both user-controlled and manual theme management with light/dark modes and color themes (default, blue, green).
+
+### User-Controlled Themes (Default)
+
+Allow users to toggle between themes via the UI:
+
+```tsx
+// In layout.tsx or root component
+<ThemeProvider
+  attribute="class"
+  defaultTheme="system"
+  enableSystem
+  disableTransitionOnChange
+>
+  {children}
+</ThemeProvider>
+
+// In navigation
+<ThemeToggle />
+```
+
+### Manual Theme Control
+
+Lock the theme to specific values, preventing user changes:
+
+```tsx
+// In layout.tsx or root component
+<ThemeProvider
+  attribute="class"
+  manualTheme={{ mode: "light", colorTheme: "green" }}
+  disableToggle={true}
+  disableTransitionOnChange
+>
+  {children}
+</ThemeProvider>
+
+// In navigation - button will be disabled
+<ThemeToggle disabled={true} />
+```
+
+**Manual Theme Options:**
+
+- `mode`: `"light"` | `"dark"` | `"system"`
+- `colorTheme`: `"default"` | `"blue"` | `"green"`
+
+When `disableToggle={true}` is set on ThemeProvider, the theme is enforced programmatically. The `disabled={true}` prop on ThemeToggle disables the UI button to prevent confusion.
+
+### Hybrid Approach
+
+Keep toggle enabled but force a default mode:
+
+```tsx
+<ThemeProvider
+  attribute="class"
+  defaultTheme="light"
+  enableSystem={false}
+  disableTransitionOnChange
+>
+  {children}
+</ThemeProvider>
+```
+
 ## Assets & Styling Notes
 
 - Remote images must match the patterns declared in `next.config.ts` (`unsplash.com`, `flowbite.s3.amazonaws.com`, Umbraco hostnames, etc.). Update this list when introducing new asset providers.
 - Tailwind CSS scans `src/**/*` (plus the optional `packages/core` path) for class usage. If you relocate or add directories, update `tailwind.config.js` accordingly.
-- Theme variables live in `src/app/globals.css`. Adjust CSS custom properties there to change the global design language.
+- Theme variables live in `src/app/globals.css`. Adjust CSS custom properties there to change the global design language. Color themes (blue, green) are defined via `.theme-blue` and `.theme-green` classes that override the default HSL values.
 
 ## Troubleshooting
 
