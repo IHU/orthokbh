@@ -55,7 +55,7 @@ export default function Service({ content }: { content: ServiceCardData }) {
         </nav>
         <ul className="space-y-4 mb-8 flex-grow">
           {content.listItems?.map((item, idx) => (
-            <li className="flex gap-3 text-slate-700" key={idx}>
+            <li className="flex gap-3" key={idx}>
               <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0" />
               <span>{item}</span>
             </li>
