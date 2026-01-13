@@ -38,6 +38,7 @@ export const Footer: React.FC<FooterProps> = ({
   footerBottomBarLinks = [],
   properties,
 }) => {
+  console.log("Footer properties:", quickLinks);
   return (
     <footer
       className={`py-10 bg-background border-t text-foreground font-body ${className}`}
@@ -97,7 +98,7 @@ export const Footer: React.FC<FooterProps> = ({
               {quickLinks.map((link, index) => (
                 <li key={index} className="flex items-center gap-2">
                   <ArrowRight className="h-4 w-4 text-primary" />
-                  <Link href={link.route?.path ?? "#"}>{link.title}</Link>
+                  <Link href={link.url ?? "#"}>{link.title}</Link>
                 </li>
               ))}
             </ul>

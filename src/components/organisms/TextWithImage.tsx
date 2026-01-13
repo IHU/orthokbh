@@ -26,7 +26,7 @@ export default function TextWithImage({
               {content.title}
             </h2>
             <div
-              className="text-muted-foreground md:text-lg"
+              className="md:text-lg"
               dangerouslySetInnerHTML={{
                 __html: content?.blockContent?.markup ?? "",
               }}

@@ -82,7 +82,7 @@ export default function FeatureProfile({
                 {content.title}
               </h3>
             </div>
-            <div className="space-y-4 text-muted-foreground">
+            <div className="space-y-4">
               {content.text && (
                 <div dangerouslySetInnerHTML={{ __html: fixedMarkup }} />
               )}
