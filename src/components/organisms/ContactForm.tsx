@@ -192,7 +192,7 @@ export default function ContactForm({
 
   return (
     <div className="bg-background rounded-2xl shadow-xl p-8 max-w-md mx-auto text-foreground">
-      <h2 className="text-2xl font-bold mb-8 text-center">
+      <h2 className="font-headline text-2xl font-bold mb-8 text-center">
         {content.title ?? "Contact"}
       </h2>
       <Form {...form}>

@@ -78,7 +78,7 @@ export default function FeatureProfile({
               <h2 className="text-primary font-bold tracking-wider uppercase text-sm mb-2">
                 {content.tag}
               </h2>
-              <h3 className="text-3xl md:text-4xl font-bold text-foreground leading-tight">
+              <h3 className="font-headline text-3xl md:text-4xl font-bold text-foreground leading-tight">
                 {content.title}
               </h3>
             </div>

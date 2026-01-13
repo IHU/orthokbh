@@ -4,8 +4,8 @@
 
 @layer base {
   :root {
-    --font-body: "Poppins", system-ui, sans-serif;
-    --font-headline: var(--font-body);
+    --font-body: "Manrope", -apple-system, sans-serif;
+    --font-headline: "Lora", Georgia, serif;
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
@@ -196,7 +196,7 @@
 
 @layer components {
   .richtext {
-    @apply text-base sm:text-[1.05rem] md:text-lg leading-relaxed prose prose-lg max-w-none text-left dark:prose-invert prose-headings:text-foreground prose-headings:font-semibold prose-lead:text-foreground/80 prose-a:text-primary prose-strong:text-foreground prose-code:text-primary prose-blockquote:text-foreground prose-blockquote:border-primary prose-img:rounded-xl prose-table:text-foreground;
+    @apply font-body text-base sm:text-[1.05rem] md:text-lg leading-relaxed prose prose-lg max-w-none text-left dark:prose-invert prose-headings:font-headline prose-headings:text-foreground prose-headings:font-semibold prose-lead:text-foreground/80 prose-a:text-primary prose-strong:text-foreground prose-code:text-primary prose-blockquote:text-foreground prose-blockquote:border-primary prose-img:rounded-xl prose-table:text-foreground;
   }
 
   .richtext a {
@@ -218,6 +218,10 @@
 
   .richtext li {
     @apply text-base leading-relaxed;
+  }
+
+  .richtext p {
+    @apply font-body;
   }
 
   .richtext li > p {

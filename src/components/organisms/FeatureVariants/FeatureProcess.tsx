@@ -42,7 +42,7 @@ export default function FeatureProcess({
   return (
     <section className={`py-12 md:py-16 lg:py-24 px-4 ${sectionBgClass}`}>
       <div className="max-w-5xl mx-auto text-center mb-8 md:mb-12 lg:mb-16">
-        <h2 className="text-2xl sm:text-3xl font-bold mb-3 md:mb-4">
+        <h2 className="font-headline text-2xl sm:text-3xl font-bold mb-3 md:mb-4">
           {content.title || ""}
         </h2>
         <div className="text-sm md:text-base text-muted-foreground">
@@ -78,7 +78,7 @@ export default function FeatureProcess({
                       />
                     </div>
                     <div className="pt-1 md:pt-1.5 lg:pt-2">
-                      <h4 className="text-lg md:text-xl font-bold text-foreground mb-1.5 md:mb-2">
+                      <h4 className="font-headline text-lg md:text-xl font-bold text-foreground mb-1.5 md:mb-2">
                         {step.title}
                       </h4>
                       <p className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-xl">

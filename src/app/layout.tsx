@@ -1,6 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Manrope, Lora } from "next/font/google";
 import { Header } from "@ihu/umbraco-components";
 import Link from "next/link";
 import Image from "next/image";
@@ -26,19 +26,22 @@ import type { AnalyticsPageContext } from "@/lib/analytics/schema";
 import { CookieConsent } from "@/components/consent/cookie-consent";
 import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/seo/jsonld";
 
-const poppins = Poppins({
+const manrope = Manrope({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
   adjustFontFallback: true,
-  fallback: [
-    "system-ui",
-    "-apple-system",
-    "BlinkMacSystemFont",
-    "Segoe UI",
-    "sans-serif",
-  ],
+  fallback: ["-apple-system", "sans-serif"],
   variable: "--font-body",
+});
+
+const lora = Lora({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  display: "swap",
+  adjustFontFallback: true,
+  fallback: ["Georgia", "serif"],
+  variable: "--font-headline",
 });
 
 export const metadata: Metadata = {
@@ -134,10 +137,10 @@ export default async function RootLayout({
   };
 
   return (
-    <html lang="en" suppressHydrationWarning className={poppins.variable}>
+    <html lang="en" suppressHydrationWarning className={`${manrope.variable} ${lora.variable}`}>
       <body
         className={cn(
-          poppins.className,
+          manrope.className,
           "min-h-screen bg-background font-body antialiased flex flex-col"
         )}
         suppressHydrationWarning

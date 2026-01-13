@@ -66,7 +66,7 @@ export function HeroVariantOne({ content }: { content: HeroSectionData }) {
           <h2 className="text-primary font-bold tracking-widest text-sm uppercase mb-4">
             {content?.tag}
           </h2>
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
+          <h1 className="font-headline text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
             {content?.headline}
           </h1>
           <p className="text-lg text-muted-foreground mb-8">

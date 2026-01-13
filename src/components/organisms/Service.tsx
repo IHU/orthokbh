@@ -31,7 +31,7 @@ export default function Service({ content }: { content: ServiceCardData }) {
         <div className="rounded-full bg-primary/10 p-3">
           <DynamicIcon name={iconName} className="h-6 w-6 text-primary" />
         </div>
-        <CardTitle className="font-headline text-2xl">
+        <CardTitle className="font-headline text-2xl font-bold">
           {content.title}
         </CardTitle>
       </CardHeader>

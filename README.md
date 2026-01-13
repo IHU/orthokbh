@@ -183,6 +183,49 @@ Keep toggle enabled but force a default mode:
 - Tailwind CSS scans `src/**/*` (plus the optional `packages/core` path) for class usage. If you relocate or add directories, update `tailwind.config.js` accordingly.
 - Theme variables live in `src/app/globals.css`. Adjust CSS custom properties there to change the global design language. Color themes (blue, green) are defined via `.theme-blue` and `.theme-green` classes that override the default HSL values.
 
+### Changing Font Family
+
+The application uses Google Fonts loaded via Next.js font optimization. To change the font family, update 4 locations in `src/app/layout.tsx`:
+
+1. **Import statement:**
+
+```tsx
+import { YourNewFont } from "next/font/google";
+```
+
+2. **Font configuration:**
+
+```tsx
+const yourNewFont = YourNewFont({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  adjustFontFallback: true,
+  fallback: [
+    "system-ui",
+    "-apple-system",
+    "BlinkMacSystemFont",
+    "Segoe UI",
+    "sans-serif",
+  ],
+  variable: "--font-body",
+});
+```
+
+3. **HTML className:**
+
+```tsx
+<html lang="en" suppressHydrationWarning className={yourNewFont.variable}>
+```
+
+4. **Body className:**
+
+```tsx
+<body className={cn(yourNewFont.className, "min-h-screen bg-background font-body antialiased flex flex-col")}>
+```
+
+The CSS variable name (`--font-body`) and Tailwind utility class (`font-body`) remain the same, so no additional configuration changes are needed. Browse available fonts at [Google Fonts](https://fonts.google.com/).
+
 ## Troubleshooting
 
 - Missing navigation items usually indicate `visibleToNavigation` is unset in Umbraco. The helper `fetchContentChildren` filters out hidden items by design.

@@ -60,9 +60,28 @@ export function HeroVariantTwo({ content }: { content: HeroSectionData }) {
     );
   };
   const imageSrc = buildUmbracoMediaUrl(content?.heroImage?.[0]?.url || "");
+  // Parse headline to support highlighting with **word** syntax
+  const parseHeadline = (headline: string | undefined) => {
+    if (!headline) return { before: "", highlight: "", after: "" };
 
+    const highlightMatch = headline.match(/^(.*?)\*\*(.*?)\*\*(.*)$/);
+    if (highlightMatch) {
+      return {
+        before: highlightMatch[1],
+        highlight: highlightMatch[2],
+        after: highlightMatch[3],
+      };
+    }
+
+    // If no markers, return the whole headline without highlighting
+    return { before: headline, highlight: "", after: "" };
+  };
+
+  const { before, highlight, after } = parseHeadline(
+    content?.headline ?? undefined
+  );
   return (
-    <section className="font-poppins grid lg:grid-cols-2 min-h-[70vh] items-stretch">
+    <section className="grid lg:grid-cols-2 min-h-[70vh] items-stretch">
       <div className="relative h-[400px] lg:h-auto">
         <Image
           src={imageSrc || ""}
@@ -79,8 +98,31 @@ export function HeroVariantTwo({ content }: { content: HeroSectionData }) {
         <h2 className="text-primary font-bold tracking-widest text-sm mb-6 uppercase">
           {content?.tag || content?.subHeadline}
         </h2>
-        <h1 className="text-5xl md:text-6xl font-bold leading-tight mb-8 tracking-tighter text-foreground">
-          {formatTitle(content?.headline)}
+        <h1 className="font-headline text-5xl md:text-6xl font-bold leading-tight mb-8 tracking-tighter text-foreground">
+          {before}
+          {highlight && (
+            <>
+              {before && " "}
+              <span className="text-primary relative">
+                {highlight}
+                <svg
+                  className="absolute -bottom-2 left-0 w-full"
+                  height="8"
+                  viewBox="0 0 200 8"
+                  fill="none"
+                >
+                  <path
+                    d="M1 5.5C40 2.5 80 1 120 2.5C160 4 180 6 199 5.5"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    className="text-primary"
+                  />
+                </svg>
+              </span>
+            </>
+          )}
+          {after && <> {after}</>}
         </h1>
         <p className="text-lg text-muted-foreground mb-10 max-w-md">
           {content?.subHeadline}
