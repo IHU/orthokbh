@@ -68,7 +68,7 @@ export default function Container({
             <Link
               href={content.link?.route?.path || "#"}
               onClick={handleCtaClick}
-              className="absolute top-0 right-0 inline-flex items-center px-8 py-4 border-2 border-foreground rounded-full text-foreground font-semibold hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all group"
+              className="mt-6 md:mt-0 md:absolute md:top-0 md:right-0 inline-flex items-center justify-center px-6 py-3 md:px-8 md:py-4 border-2 border-foreground rounded-full text-foreground font-semibold hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all group w-full md:w-auto"
             >
               {content.link.title || "Learn More"}
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />

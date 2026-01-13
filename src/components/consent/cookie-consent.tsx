@@ -142,7 +142,7 @@ export function CookieConsent(): JSX.Element | null {
                 </p>
                 <p className="text-sm text-muted-foreground">
                   Læs mere i vores{" "}
-                  <Link className="underline" href="/cookie-politik">
+                  <Link className="underline" href="/cookiepolitik">
                     cookie-
                   </Link>{" "}
                   og{" "}
