@@ -2,6 +2,7 @@
 
 import React from "react";
 import { BlockRenderer } from "@/lib/BlockRenderer";
+import { BlockGridRenderer } from "@/components/templates/BlockGridRenderer";
 import { ContainerBlockData } from "@ihu/umbraco-components";
 import { ContainerBlockPropertiesModel } from "@ihu/umbraco-components/dist/api/umbraco";
 import { ArrowRight } from "lucide-react";
@@ -18,19 +19,34 @@ export default function Container({
   const { trackCta } = useAnalyticsEvents();
   const blockContext = useAnalyticsBlock();
 
+  // Early return if no content
+  if (!content) {
+    console.warn("Container: No content provided");
+    return null;
+  }
+
+  // Check for grid data
+  const hasGrid = content?.grid?.items && content.grid.items.length > 0;
+  const gridBlocks = content?.grid?.items || [];
+
   // valid child block before rendering
   const validChildren =
-    content.blocks?.items?.filter(
+    content?.blocks?.items?.filter(
       (child) => child && child.content && child.content.properties
     ) || [];
 
-  /*console.log(
-    "Blocks:",
-    validChildren
-      .filter((item) => item?.content)
-      .map((item) => item.content.contentType)
-  );*/
-  const sectionBgClass = content.sectionBackground
+  // Debug logging
+  if (hasGrid) {
+    console.log("Container - Grid detected:", {
+      gridColumns: content.grid?.gridColumns,
+      itemCount: content.grid?.items.length,
+    });
+  }
+  if (validChildren.length > 0) {
+    console.log("Container - Regular blocks:", validChildren.length);
+  }
+
+  const sectionBgClass = content?.sectionBackground
     ? `bg-${content.sectionBackground}/75`
     : "bg-secondary/75";
   const columns = content.column || 0;
@@ -76,22 +92,35 @@ export default function Container({
           )}
         </div>
 
-        <div
-          className={`grid gap-8 justify-items-center ${
-            validChildren.length === 2
-              ? "grid-cols-1 md:grid-cols-2 justify-center"
-              : `grid-cols-1 md:grid-cols-${columns}`
-          }`}
-        >
-          {validChildren.map((child, idx) => (
-            <div
-              key={idx}
-              className={`w-full ${columns !== 0 ? "max-w-lg" : ""}`}
-            >
-              <BlockRenderer block={child.content} />
-            </div>
-          ))}
-        </div>
+        {/* Render Block Grid if available */}
+        {hasGrid && (
+          <div className="mb-8">
+            <BlockGridRenderer
+              blocks={gridBlocks}
+              gridColumns={content.grid?.gridColumns}
+            />
+          </div>
+        )}
+
+        {/* Render regular blocks if available */}
+        {validChildren.length > 0 && (
+          <div
+            className={`grid gap-8 justify-items-center ${
+              validChildren.length === 2
+                ? "grid-cols-1 md:grid-cols-2 justify-center"
+                : `grid-cols-1 md:grid-cols-${columns}`
+            }`}
+          >
+            {validChildren.map((child, idx) => (
+              <div
+                key={idx}
+                className={`w-full ${columns !== 0 ? "max-w-lg" : ""}`}
+              >
+                <BlockRenderer block={child.content} />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
