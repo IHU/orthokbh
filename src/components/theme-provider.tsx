@@ -26,9 +26,15 @@ export function ThemeProvider({
 
   React.useEffect(() => {
     if (disableToggle && manualTheme?.colorTheme) {
-      document.documentElement.classList.remove('theme-blue', 'theme-green', 'theme-default');
-      if (manualTheme.colorTheme !== 'default') {
-        document.documentElement.classList.add(`theme-${manualTheme.colorTheme}`);
+      document.documentElement.classList.remove(
+        "theme-blue",
+        "theme-green",
+        "theme-default"
+      );
+      if (manualTheme.colorTheme !== "default") {
+        document.documentElement.classList.add(
+          `theme-${manualTheme.colorTheme}`
+        );
       }
     }
   }, [disableToggle, manualTheme]);
