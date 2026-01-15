@@ -23,18 +23,7 @@ import { PageJsonLd, BreadcrumbJsonLd } from "@/components/seo/jsonld";
 import { buildBreadcrumbs } from "@/lib/utils";
 import { buildAnalyticsContextFromContent } from "@/lib/analytics/context";
 import { parseHeadline } from "@/lib/strings/utils";
-import Link from "next/link";
-import {
-  User,
-  Calendar,
-  Stethoscope,
-  ArrowUpRight,
-  Phone,
-  Clock,
-  MapPin,
-  ChevronRight,
-  Info,
-} from "lucide-react";
+
 // Viewport configuration for Next.js 15
 export const viewport = {
   width: "device-width",
@@ -209,35 +198,7 @@ function ArticlePage({ content }: { content: ContentContentModel }) {
     }
   )?.socialImage?.[0]?.url;
   const primaryImageUrl = openGraphImageUrl ?? socialImageUrl;
-  const categories = [
-    {
-      title: "Din første konsultation",
-      subtitle: "Forberedelse & Forløb",
-      description:
-        "Bliv klar til dit møde med speciallægen. Vi guider dig gennem forsikringstyper, registrering og din personlige behandlingsplan.",
-      icon: <Stethoscope className="w-6 h-6" />,
-      href: "/praktisk-info/konsultation",
-      color: "bg-primary/10 text-primary",
-    },
-    {
-      title: "Afbud og ændring",
-      subtitle: "Fleksibilitet & Regler",
-      description:
-        "Har dine planer ændret sig? Se hvordan du nemt flytter eller aflyser din tid senest 24 timer før din planlagte aftale.",
-      icon: <Calendar className="w-6 h-6" />,
-      href: "/praktisk-info/afbud-og-aendring",
-      color: "bg-primary/10 text-primary",
-    },
-    {
-      title: "Speciallæge Samir Ejam",
-      subtitle: "Ekspertise & Tryghed",
-      description:
-        "Lær mere om erfaringen bag klinikken. Specialiseret kirurgi i lokalbedøvelse med fokus på hænder, fødder og knæ.",
-      icon: <User className="w-6 h-6" />,
-      href: "/praktisk-info/speciallaege-samir-ejam",
-      color: "bg-primary/10 text-primary",
-    },
-  ];
+
   return (
     <AnalyticsProvider value={pageContext}>
       <BreadcrumbJsonLd items={breadcrumbs} />
@@ -302,7 +263,7 @@ function ArticlePage({ content }: { content: ContentContentModel }) {
                   </Breadcrumb>
 
                   <div>
-                    <h1 className="text-4xl md:text-7xl font-bold text-primary-foreground mb-8 tracking-tight">
+                    <h1 className="text-4xl md:text-7xl font-headline font-bold text-primary-foreground mb-8 tracking-tight">
                       {before}
                       {highlight && (
                         <>
