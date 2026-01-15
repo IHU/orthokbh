@@ -151,7 +151,7 @@ export default async function RootLayout({
       >
         <ThemeProvider
           attribute="class"
-          enableSystem
+          enableSystem={false}
           disableTransitionOnChange
           manualTheme={{ mode: "light", colorTheme: "green" }}
           disableToggle={true}
@@ -207,7 +207,7 @@ export default async function RootLayout({
                       <div className="md:hidden">
                         <MobileNav
                           navigation={data.navigation}
-                          logo={data.logo}
+                          logo={logoUrl}
                         />
                       </div>
                     </div>

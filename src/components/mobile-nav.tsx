@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
 import { Button } from "@/components/atoms/button";
 import {
@@ -19,7 +20,7 @@ import { useAnalyticsEvents } from "@/components/analytics/use-analytics-events"
 
 interface MobileNavProps {
   navigation: NavigationItem[];
-  logo?: React.ReactNode;
+  logo?: string;
 }
 
 export function MobileNav({ navigation, logo }: MobileNavProps) {
@@ -140,25 +141,22 @@ export function MobileNav({ navigation, logo }: MobileNavProps) {
       <SheetContent side="right" className="w-full p-0 flex flex-col">
         {/* Header */}
         <SheetHeader className="px-6 py-5 border-b bg-muted/30">
-          <div className="flex items-center justify-between">
-            <SheetTitle className="text-xl">
-              {logo || (
-                <Link
-                  href="/"
-                  onClick={() => setOpen(false)}
-                  className="text-2xl font-bold hover:opacity-80 transition-opacity"
-                >
-                  Menu
-                </Link>
-              )}
-            </SheetTitle>
-            <SheetClose asChild>
-              <Button variant="ghost" size="icon" className="h-8 w-8">
-                <X className="h-5 w-5" />
-                <span className="sr-only">Close</span>
-              </Button>
-            </SheetClose>
-          </div>
+          <SheetTitle className="text-xl">
+            <div className="logo">
+              <Link href="/" className="text-xl md:text-2xl font-bold">
+                {logo ? (
+                  <Image
+                    src={logo}
+                    width={556}
+                    height={56}
+                    alt="Ortopædkirurgisk Klinik ved Søerne"
+                  />
+                ) : (
+                  <span>Ortopædkirurgisk Klinik ved Søerne</span>
+                )}
+              </Link>
+            </div>
+          </SheetTitle>
         </SheetHeader>
 
         {/* Navigation */}
