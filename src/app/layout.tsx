@@ -140,7 +140,7 @@ export default async function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${manrope.variable} ${lora.variable}`}
+      className={`${manrope.variable} ${lora.variable} light theme-green`}
     >
       <body
         className={cn(

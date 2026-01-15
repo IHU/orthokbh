@@ -24,18 +24,29 @@ export function ThemeProvider({
       ? { ...props, forcedTheme: manualTheme.mode || "system" }
       : props;
 
+  React.useEffect(() => {
+    if (disableToggle && manualTheme?.colorTheme) {
+      document.documentElement.classList.remove('theme-blue', 'theme-green', 'theme-default');
+      if (manualTheme.colorTheme !== 'default') {
+        document.documentElement.classList.add(`theme-${manualTheme.colorTheme}`);
+      }
+    }
+  }, [disableToggle, manualTheme]);
+
   return (
     <>
       {disableToggle &&
         manualTheme?.colorTheme &&
         manualTheme.colorTheme !== "default" && (
-          <script
+          <Script
+            id="theme-script"
+            strategy="beforeInteractive"
             dangerouslySetInnerHTML={{
               __html: `
               (function() {
                 try {
                   var colorTheme = '${manualTheme.colorTheme}';
-                  document.documentElement.classList.remove('theme-blue', 'theme-green');
+                  document.documentElement.classList.remove('theme-blue', 'theme-green', 'theme-default');
                   if (colorTheme !== 'default') {
                     document.documentElement.classList.add('theme-' + colorTheme);
                   }
