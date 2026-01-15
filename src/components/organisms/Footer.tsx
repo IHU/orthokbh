@@ -4,10 +4,11 @@ import {
   Umbraco_Cms_Core_Models_DeliveryApi_ApiLink,
   Umbraco_Cms_Core_Models_DeliveryApi_IApiContent,
 } from "@ihu/umbraco-components/dist/api/umbraco";
-import { ArrowRight, MapPin, Phone, Mail } from "lucide-react";
+import { ArrowRight, MapPin, Phone, Mail, Building } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import React from "react";
+import { buildUmbracoMediaUrl } from "@/lib/media";
 
 export interface FooterProps {
   className?: string;
@@ -20,6 +21,7 @@ export interface FooterProps {
   city?: string;
   email?: string;
   phone?: string;
+  cvr?: string;
   footerBottomBarLinks: Umbraco_Cms_Core_Models_DeliveryApi_ApiLink[];
   properties: HomePropertiesModel;
 }
@@ -34,11 +36,13 @@ export const Footer: React.FC<FooterProps> = ({
   postalCode,
   city,
   email,
+  cvr,
   phone,
   footerBottomBarLinks = [],
   properties,
 }) => {
-  console.log("Footer properties:", quickLinks);
+  const primaryImageUrl = buildUmbracoMediaUrl(properties.logos?.[0]?.url);
+  /*console.log("Primary Image URL:", primaryImageUrl);*/
   return (
     <footer
       className={`py-10 bg-background border-t text-foreground font-body ${className}`}
@@ -62,11 +66,18 @@ export const Footer: React.FC<FooterProps> = ({
               <Mail className="h-5 w-5 text-primary" />
               <span>{email}</span>
             </div>
+            <div className="flex items-center gap-2 text-base">
+              <Building className="h-5 w-5 text-primary" />
+              <span>{cvr}</span>
+            </div>
             {/* Member Section */}
             <div className="mt-10">
               <div className="flex items-center">
                 <Image
-                  src="https://mediebibliotek.cancer.dk/transform/fccc73bb-afbb-49d1-9b2e-775422a80277/KC_FRIVILLIGE_VISTOETTER_RGB"
+                  src={
+                    primaryImageUrl ||
+                    "https://mediebibliotek.cancer.dk/transform/fccc73bb-afbb-49d1-9b2e-775422a80277/KC_FRIVILLIGE_VISTOETTER_RGB"
+                  }
                   alt="Medlem af logo"
                   className="h-24 w-auto object-contain"
                   width={150}
@@ -78,9 +89,9 @@ export const Footer: React.FC<FooterProps> = ({
 
           {/* Treatments */}
           <div>
-            <h4 className="font-headline text-lg font-bold mb-2">
+            <h3 className="font-headline text-lg font-bold mb-2">
               Operationer
-            </h4>
+            </h3>
             <ul className="space-y-2">
               {links.map((link, index) => (
                 <li key={index} className="flex items-center gap-2">
@@ -93,7 +104,7 @@ export const Footer: React.FC<FooterProps> = ({
 
           {/* More Information */}
           <div>
-            <h4 className="font-headline text-lg font-bold mb-2">Links</h4>
+            <h3 className="font-headline text-lg font-bold mb-2">Links</h3>
             <ul className="space-y-2">
               {quickLinks.map((link, index) => (
                 <li key={index} className="flex items-center gap-2">
@@ -106,9 +117,9 @@ export const Footer: React.FC<FooterProps> = ({
 
           {/* Opening Hours & Phone Hours */}
           <div>
-            <h4 className="font-headline text-lg font-bold mb-2">
+            <h3 className="font-headline text-lg font-bold mb-2">
               Telefon tider
-            </h4>
+            </h3>
             <ul className="space-y-1">
               {workingHoursExtended && workingHoursExtended.length > 0 ? (
                 workingHoursExtended.map((workingHour, index) => {
@@ -161,7 +172,7 @@ export const Footer: React.FC<FooterProps> = ({
             {footerBottomBarLinks.map((link, index) => (
               <Link
                 key={index}
-                href={link.url ?? "#"}
+                href={link.route?.path ?? "#"}
                 className="hover:underline"
               >
                 {link.title}

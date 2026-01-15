@@ -137,7 +137,11 @@ export default async function RootLayout({
   };
 
   return (
-    <html lang="en" suppressHydrationWarning className={`${manrope.variable} ${lora.variable}`}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${manrope.variable} ${lora.variable}`}
+    >
       <body
         className={cn(
           manrope.className,
@@ -240,21 +244,9 @@ export default async function RootLayout({
               postalCode={properties.postalCode || ""}
               city={properties.city || ""}
               email={properties.email || ""}
+              cvr={properties.cvr || ""}
               phone={properties.phoneNumber || ""}
-              footerBottomBarLinks={
-                [
-                  /*{
-                  title: "Tilsynsrapport",
-                  url: "/tilsynsrapport",
-                  linkType: "Content",
-                },
-                {
-                  title: "Cookies",
-                  url: "/cookies",
-                  linkType: "Content",
-                },*/
-                ]
-              }
+              footerBottomBarLinks={properties?.policyLinks || []}
               properties={properties}
             />
             <CookieConsent />

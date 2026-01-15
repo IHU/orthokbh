@@ -65,7 +65,6 @@ export default function FeatureProcess({
                 const iconName: IconName = step.icon
                   ? (step.icon as IconName)
                   : "circle";
-                console.log("Block Item : ", step, step.icon);
                 return (
                   <div
                     key={idx}

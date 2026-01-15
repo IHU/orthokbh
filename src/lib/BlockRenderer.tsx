@@ -21,6 +21,7 @@ import {
   Seo,
   CtaActionBlock,
   HeroSection,
+  FaqBlock,
 } from "@ihu/umbraco-components";
 import {
   Umbraco_Cms_Core_Models_DeliveryApi_ApiBlockItem,
@@ -42,7 +43,7 @@ import IFrameMap from "@/components/organisms/IFrameMap";
 import Ups from "@/components/atoms/Ups";
 import HeroBlockRender from "@/components/templates/HeroBlockRender";
 import FeatureBlockRender from "@/components/templates/FeatureBlockRender";
-
+import FaqAccordion from "@/components/organisms/FaqAccordion";
 const blockMap: Record<string, React.FC<any>> = {
   heroBlock: HeroBlock,
   footerBlock: FooterBlock,
@@ -62,6 +63,7 @@ const blockMap: Record<string, React.FC<any>> = {
   upsBlock: UpsBlock,
   ctaActionBlock: CtaActionBlock,
   heroSection: HeroSection,
+  faqBlock: FaqBlock,
 };
 // Define all UI components in one place
 const blockUIMap: Record<string, React.FC<any>> = {
@@ -79,6 +81,7 @@ const blockUIMap: Record<string, React.FC<any>> = {
   upsBlock: Ups,
   ctaActionBlock: CtaAction,
   heroSection: HeroBlockRender,
+  faqBlock: FaqAccordion,
 };
 
 export const BlockRenderer = ({ block }: { block: any }) => {
@@ -104,7 +107,6 @@ export const BlockRenderer = ({ block }: { block: any }) => {
 
   //console.log("Rendering block of type:", block.contentType);
   //console.log("DynamicComponent:", DynamicComponent);
-   console.log("UIComponent:", UIComponent);
 
   if (!DynamicComponent || !UIComponent) {
     return <div>Component not found : {block.contentType}</div>;

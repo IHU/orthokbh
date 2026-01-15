@@ -93,7 +93,6 @@ export default function FeatureProfile({
                 const iconName: IconName = step.icon
                   ? (step.icon as IconName)
                   : "circle";
-                console.log("Block Item : ", step, step.icon);
                 return (
                   <div
                     key={idx}

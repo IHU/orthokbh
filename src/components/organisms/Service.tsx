@@ -24,7 +24,7 @@ export default function Service({ content }: { content: ServiceCardData }) {
   const iconName: IconName = content.icon
     ? (content.icon as IconName)
     : "stethoscope";
-  console.log("List Items : ", content.listItems);
+
   return (
     <Card className="transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
       <CardHeader className="flex flex-row items-center gap-4">

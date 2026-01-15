@@ -5,6 +5,7 @@ import { FeatureBlockData } from "@ihu/umbraco-components";
 import FeatureSimple from "../organisms/FeatureVariants/FeatureSimple";
 import FeatureProcess from "../organisms/FeatureVariants/FeatureProcess";
 import FeatureProfile from "../organisms/FeatureVariants/FeatureProfile";
+import FeatureGuide from "../organisms/FeatureVariants/FeatureGuide";
 
 /**
  * Component registry mapping content type aliases to React components
@@ -13,13 +14,13 @@ const blockVariantMap: Record<string, React.FC<any>> = {
   simple: FeatureSimple,
   process: FeatureProcess,
   profile: FeatureProfile,
+  guide: FeatureGuide,
 };
 export default function FeatureBlockRender({
   content,
 }: {
   content: FeatureBlockData;
 }) {
-  console.log("FeatureBlockRender content:", content);
   const DynamicComponent =
     content.featureVariant && blockVariantMap[content.featureVariant]
       ? blockVariantMap[content.featureVariant]

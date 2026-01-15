@@ -33,7 +33,7 @@ export default function Container({
   const sectionBgClass = content.sectionBackground
     ? `bg-${content.sectionBackground}/75`
     : "bg-secondary/75";
-  const columns = content.column || 4;
+  const columns = content.column || 0;
   const textAlign = content.textAlignment || "center";
   const isCentered = textAlign === "center";
 
@@ -47,7 +47,7 @@ export default function Container({
       });
     }
   };
-
+  console.log("Container Grid:", content.grid);
   return (
     <section className={`py-5 lg:py-16 ${sectionBgClass}`}>
       <div className="container mx-auto px-4 md:px-6">
@@ -84,7 +84,10 @@ export default function Container({
           }`}
         >
           {validChildren.map((child, idx) => (
-            <div key={idx} className="w-full max-w-lg">
+            <div
+              key={idx}
+              className={`w-full ${columns !== 0 ? "max-w-lg" : ""}`}
+            >
               <BlockRenderer block={child.content} />
             </div>
           ))}
