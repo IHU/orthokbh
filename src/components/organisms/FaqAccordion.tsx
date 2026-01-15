@@ -9,7 +9,7 @@ import {
 
 export default function FaqAccordion({ content }: { content: FaqBlockData }) {
   return (
-    <section className="bg-secondary/75">
+    <section>
       <div className="max-w-4xl mx-auto">
         <div className="space-y-10">
           <div className="space-y-4">

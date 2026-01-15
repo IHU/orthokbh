@@ -29,6 +29,33 @@ export function capitalize(str: string): string {
 }
 
 /**
+ * Parses a headline string and splits it into parts for styled rendering.
+ * Supports **highlight** syntax for emphasized text.
+ *
+ * @param headline - The headline string to parse
+ * @returns Object with before, highlight, and after parts
+ *
+ * @example
+ * parseHeadline("Welcome to **our clinic**");
+ * // { before: "Welcome to ", highlight: "our clinic", after: "" }
+ */
+export function parseHeadline(headline: string | undefined) {
+  if (!headline) return { before: "", highlight: "", after: "" };
+
+  const highlightMatch = headline.match(/^(.*?)\*\*(.*?)\*\*(.*)$/);
+  if (highlightMatch) {
+    return {
+      before: highlightMatch[1],
+      highlight: highlightMatch[2],
+      after: highlightMatch[3],
+    };
+  }
+
+  // If no markers, return the whole headline without highlighting
+  return { before: headline, highlight: "", after: "" };
+}
+
+/**
  * Pads a string evenly on both sides until it reaches the desired length.
  *
  * @param str - The input string.

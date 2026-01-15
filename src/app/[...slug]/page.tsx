@@ -22,7 +22,19 @@ import { AnalyticsProvider } from "@/components/analytics/use-analytics-context"
 import { PageJsonLd, BreadcrumbJsonLd } from "@/components/seo/jsonld";
 import { buildBreadcrumbs } from "@/lib/utils";
 import { buildAnalyticsContextFromContent } from "@/lib/analytics/context";
-
+import { parseHeadline } from "@/lib/strings/utils";
+import Link from "next/link";
+import {
+  User,
+  Calendar,
+  Stethoscope,
+  ArrowUpRight,
+  Phone,
+  Clock,
+  MapPin,
+  ChevronRight,
+  Info,
+} from "lucide-react";
 // Viewport configuration for Next.js 15
 export const viewport = {
   width: "device-width",
@@ -197,7 +209,35 @@ function ArticlePage({ content }: { content: ContentContentModel }) {
     }
   )?.socialImage?.[0]?.url;
   const primaryImageUrl = openGraphImageUrl ?? socialImageUrl;
-
+  const categories = [
+    {
+      title: "Din første konsultation",
+      subtitle: "Forberedelse & Forløb",
+      description:
+        "Bliv klar til dit møde med speciallægen. Vi guider dig gennem forsikringstyper, registrering og din personlige behandlingsplan.",
+      icon: <Stethoscope className="w-6 h-6" />,
+      href: "/praktisk-info/konsultation",
+      color: "bg-primary/10 text-primary",
+    },
+    {
+      title: "Afbud og ændring",
+      subtitle: "Fleksibilitet & Regler",
+      description:
+        "Har dine planer ændret sig? Se hvordan du nemt flytter eller aflyser din tid senest 24 timer før din planlagte aftale.",
+      icon: <Calendar className="w-6 h-6" />,
+      href: "/praktisk-info/afbud-og-aendring",
+      color: "bg-primary/10 text-primary",
+    },
+    {
+      title: "Speciallæge Samir Ejam",
+      subtitle: "Ekspertise & Tryghed",
+      description:
+        "Lær mere om erfaringen bag klinikken. Specialiseret kirurgi i lokalbedøvelse med fokus på hænder, fødder og knæ.",
+      icon: <User className="w-6 h-6" />,
+      href: "/praktisk-info/speciallaege-samir-ejam",
+      color: "bg-primary/10 text-primary",
+    },
+  ];
   return (
     <AnalyticsProvider value={pageContext}>
       <BreadcrumbJsonLd items={breadcrumbs} />
@@ -223,36 +263,59 @@ function ArticlePage({ content }: { content: ContentContentModel }) {
             metaTitle,
             metaDescription,
           } = data;
+
+          // Parse title for styled headline rendering
+          const { before, highlight, after } = parseHeadline(
+            title ?? undefined
+          );
+
           return (
-            <article>
-              <section className="bg-primary text-primary-foreground py-10">
-                <div className="container mx-auto px-4 md:px-6">
-                  <div className="mb-8">
-                    <Breadcrumb>
-                      <BreadcrumbList>
-                        {breadcrumbs.map((crumb, idx) => (
-                          <BreadcrumbItem key={idx}>
-                            {crumb.href ? (
-                              <BreadcrumbLink href={crumb.href}>
-                                {crumb.name}
-                              </BreadcrumbLink>
-                            ) : (
-                              <BreadcrumbPage>{crumb.name}</BreadcrumbPage>
-                            )}
-                            {idx < breadcrumbs.length - 1 && (
-                              <BreadcrumbSeparator />
-                            )}
-                          </BreadcrumbItem>
-                        ))}
-                      </BreadcrumbList>
-                    </Breadcrumb>
-                  </div>
-                  <div className="max-w-7xl">
-                    <h1 className="text-4xl md:text-5xl font-headline  font-bold tracking-tighter ">
-                      {title}
+            <div className="bg-background min-h-screen">
+              {/* --- MODERN HERO SECTION --- */}
+              <section className="relative py-8 overflow-hidden bg-primary">
+                <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+                  <div className="absolute top-10 left-10 w-64 h-64 rounded-full bg-primary-foreground blur-3xl" />
+                  <div className="absolute bottom-10 right-10 w-96 h-96 rounded-full bg-primary-foreground blur-3xl" />
+                </div>
+
+                <div className="container mx-auto px-4 md:px-6 relative z-10">
+                  <Breadcrumb className="flex items-center gap-2 text-primary-foreground/70 text-sm mb-10">
+                    <BreadcrumbList>
+                      {breadcrumbs.map((crumb, idx) => (
+                        <BreadcrumbItem key={idx}>
+                          {crumb.href ? (
+                            <BreadcrumbLink
+                              href={crumb.href}
+                              className="text-primary-foreground"
+                            >
+                              {crumb.name}
+                            </BreadcrumbLink>
+                          ) : (
+                            <BreadcrumbPage>{crumb.name}</BreadcrumbPage>
+                          )}
+                          {idx < breadcrumbs.length - 1 && (
+                            <BreadcrumbSeparator />
+                          )}
+                        </BreadcrumbItem>
+                      ))}
+                    </BreadcrumbList>
+                  </Breadcrumb>
+
+                  <div>
+                    <h1 className="text-4xl md:text-7xl font-bold text-primary-foreground mb-8 tracking-tight">
+                      {before}
+                      {highlight && (
+                        <>
+                          <br />
+                          <span className="text-primary-foreground/80 italic font-light tracking-normal">
+                            {highlight}
+                          </span>
+                        </>
+                      )}
+                      {after}
                     </h1>
                     <div
-                      className="mx-auto mt-4 md:text-xl"
+                      className="text-primary-foreground/80 text-xl leading-relaxed"
                       dangerouslySetInnerHTML={{
                         __html: contentArea?.markup || "",
                       }}
@@ -260,44 +323,7 @@ function ArticlePage({ content }: { content: ContentContentModel }) {
                   </div>
                 </div>
               </section>
-              {/*<section id="article" className="py-10 lg:py-10 bg-background">
-                <div className="container mx-auto px-6 max-w-3xl">
-                  <div className="flex items-center gap-4 mb-8">
-                    <Image
-                      src="https://placehold.co/48x48.png?text=SE"
-                      alt="Author Samir Ejam"
-                      width={48}
-                      height={48}
-                      className="rounded-full border"
-                    />
-                    <div>
-                      <span className="font-medium text-foreground">
-                        Af Samir Ejam
-                      </span>
-                      <span className="block text-muted-foreground text-xs">
-                        26. november 2025
-                      </span>
-                    </div>
-                  </div>
-                  <div className="mb-10">
-                    <Image
-                      src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80"
-                      alt="Ortopædkirurgi operation"
-                      width={800}
-                      height={400}
-                      className="rounded-lg shadow-xl object-cover"
-                    />
-                  </div>
 
-                  <div className="mt-10 flex justify-center">
-                    <Button asChild>
-                      <Link href="/about">
-                        Læs mere om klinikken <span className="ml-2">→</span>
-                      </Link>
-                    </Button>
-                  </div>
-                </div>
-              </section>*/}
               {/* Dynamic Block List Renderer */}
               {blocks?.items && blocks.items.length > 0 && (
                 <>
@@ -320,7 +346,7 @@ function ArticlePage({ content }: { content: ContentContentModel }) {
                   />
                 </>
               )}
-            </article>
+            </div>
           );
         }}
       </ContentPage>

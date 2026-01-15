@@ -31,7 +31,7 @@ export default function RichText({ content }: { content: RichTextBlockData }) {
 
   return (
     <>
-      <section className="bg-secondary/75 pb-8 pt-1 lg:pb-5 lg:pt-1">
+      <section className="pb-8 pt-1 lg:pb-5 lg:pt-1">
         <div className="container mx-auto px-4 md:px-6">
           {content.body && (
             <div
